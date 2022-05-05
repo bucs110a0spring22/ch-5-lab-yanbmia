@@ -31,7 +31,69 @@ import time
 #########################################################
 #                   Your Code Goes Below                #
 #########################################################
+def drawSquare(myturtle=None, width=0, top_left_x=0, top_left_y=0):
+  myturtle.pu()
+  myturtle.goto(top_left_x,top_left_y)
+  myturtle.pd()
+  myturtle.goto(top_left_x+width,top_left_y)
+  myturtle.goto(top_left_x+width, top_left_y - width)
+  myturtle.goto(top_left_x, top_left_y - width)
+  myturtle.goto(top_left_x,top_left_y)
 
+def drawLine(myturtle=None, x_start=0, y_start=0, x_end=0, y_end=0):
+  myturtle.pu()
+  myturtle.goto(x_start, y_start)
+  myturtle.pd()
+  myturtle.goto(x_end,y_end)
+  myturtle.pu()
+
+def drawCircle(myturtle=None, radius=0):
+  myturtle.pu()
+  myturtle.goto(0,-1)
+  myturtle.pd()
+  myturtle.circle(radius)
+
+def setUpDartboard(myscreen=None, myturtle=None):
+  drawSquare(myturtle,2,-1,1)
+  drawCircle(myturtle,1)
+  drawLine(myturtle,-1,0,1,0)
+  drawLine(myturtle,0,1,0,-1)
+  myscreen.setworldcoordinates(-1,-1,1,1)
+
+def throwDart(myturtle=None):
+  myturtle.pu()
+  random.uniform(-1,1)
+  myturtle.goto(random.uniform(-1,1),random.uniform(-1,1))
+  if isinCircle(myturtle):
+    myturtle.dot("blue")
+    return True
+  else:
+    myturtle.dot("red")
+    return False
+  myturtle.dot()
+
+def playDarts(myturtle=None):
+  player_scores = [0,0]
+  for i in range(2):
+    for k in range(10):
+      if throwDart(myturtle):
+        player_scores[i]=player_scores[i]+1
+        if player_scores[0]>player_scores[1]:
+          print("Player 1 Wins")
+        else:
+          print("Player 2 Wins")
+def isinCircle(myturtle=None):
+  if (myturtle.distance(0,0)<=1):
+    return True
+  else:
+    return False
+
+def montePi(myturtle=None, num_darts=0):
+  count = 0
+  for i in range(num_darts):
+    if (throwDart(myturtle)):
+      count /= 1
+      return count
 
 
 #########################################################
